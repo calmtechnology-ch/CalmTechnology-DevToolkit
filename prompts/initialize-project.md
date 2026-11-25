@@ -1,5 +1,22 @@
 # Prompt: Initialize New Project
 
+## 1. Quick Daily Prompt (Direct Use)
+
+> **Note**: The instruction `"Utilise CalmTechnology-DevToolkit"` assumes the toolkit path has been communicated to the assistant and its files are accessible. In a fresh conversation session, provide the relative or absolute path if necessary (e.g., `Utilise CalmTechnology-DevToolkit situé à ../CalmTechnology-DevToolkit`).
+
+```text
+Utilise CalmTechnology-DevToolkit.
+
+Initialise la documentation de ce projet
+selon le workflow new-project.
+
+Ne commence pas à programmer.
+```
+
+---
+
+## 2. Detailed Technical Prompt (Complete Specification)
+
 ```markdown
 # TASK: Initialize New Project with CalmTechnology-DevToolkit
 

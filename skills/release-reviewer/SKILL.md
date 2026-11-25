@@ -61,9 +61,17 @@ You are the **Lead Release Reviewer and Quality Gatekeeper**. Your responsibilit
    - Author `docs/RELEASE_REPORT.md` with explicit decision (`GO`, `CONDITIONAL_GO`, `NO_GO`, `INSUFFICIENT_EVIDENCE`).
    - Detail conditions, remaining risks, and user recommendations.
 
-## 8. Decision Rules
-- If hardware tests are `NOT_RUN` on an embedded project: Decision is strictly `INSUFFICIENT_EVIDENCE` (or `CONDITIONAL_GO` with clear "Host Simulator Only" disclaimer).
-- If one or more `CRITICAL` issues remain unresolved: Decision is strictly `NO_GO`.
+## 8. Decision Rules & Gate Status Mapping
+
+### Formal Release Decisions
+- **`GO`**: All requirements verified, all mandatory tests PASS, zero critical/high issues, documentation complete, hardware verified. Quality Gate QG-06 is **`PASS`**.
+- **`CONDITIONAL_GO`**: Minor non-critical caveats exist with documented mitigations and approved rollback plan. Quality Gate QG-06 is **`PASS`** (conditional on documented caveats).
+- **`NO_GO`**: Unresolved `CRITICAL` or `HIGH` defects, failing core tests, security risks, or unhandled regressions. Quality Gate QG-06 is **`FAIL`**.
+- **`INSUFFICIENT_EVIDENCE`**: Mandatory verification evidence is missing (e.g., hardware tests `NOT_RUN` or `BLOCKED` on embedded targets). Quality Gate QG-06 is **`BLOCKED`** pending required evidence.
+
+### Decision Rules
+- If hardware tests are `NOT_RUN` or `BLOCKED` on an embedded project: Decision is strictly `INSUFFICIENT_EVIDENCE` (or `CONDITIONAL_GO` with clear "Host Simulator Only" disclaimer), and Gate QG-06 status is `BLOCKED`.
+- If one or more `CRITICAL` or `HIGH` issues remain unresolved: Decision is strictly `NO_GO`, and Gate QG-06 status is `FAIL`.
 - If minor documentation typos exist: Decision may be `CONDITIONAL_GO` with condition to fix before tagging.
 
 ## 9. Expected Outputs

@@ -13,28 +13,28 @@
 > ### **VERDICT: INSUFFICIENT_EVIDENCE**
 
 #### Justification for Verdict
-1. **Host Verification Succeeded**: 100% of host simulation tests (`SYS-001` to `SYS-010`, `REG-001`, `PERF-001`) passed with empirical console evidence.
-2. **Codebase Audited**: Zero open `CRITICAL` or `HIGH` severity defects exist in `docs/KNOWN_ISSUES.md`.
-3. **MANDATORY HARDWARE PROOF ABSENT**: CoreS3-RuleBot is an embedded application targeting physical M5Stack CoreS3 hardware. Required physical hardware acceptance tests (`MAT-001`: LCD landscape rendering and touch interaction) and soak tests (`MAT-002`: memory stability across 100 queries) have **NOT BEEN EXECUTED** on physical hardware (`status: NOT_RUN`).
-4. **Toolkit Standard Enforcement**: Under the **CalmTechnology-DevToolkit** rules of engagement, an embedded software version cannot receive a definitive `GO` verdict while physical hardware tests remain unverified.
+1. **Architectural Specification Established**: Requirements (`REQ-F-xxx`, `REQ-NF-xxx`) and ADRs (`ADR-001` to `ADR-003`) are fully documented and internally consistent (Gates QG-01 and QG-02 PASS).
+2. **Pedagogical Host Modeling Disclosed**: Illustrative test logs and latency estimates are provided for training in `docs/TEST_RESULTS.md`, but empirical execution in the target repository remains unverified (`NOT_RUN`).
+3. **MANDATORY HARDWARE PROOF ABSENT**: CoreS3-RuleBot is an embedded application targeting physical M5Stack CoreS3 hardware. Required physical hardware acceptance tests (`MAT-001`: LCD landscape rendering and touch interaction) and soak tests (`MAT-002`: memory stability across 100 queries) are **BLOCKED** due to absence of physical silicon bench equipment.
+4. **Toolkit Standard Enforcement**: Under the **CalmTechnology-DevToolkit** rules of engagement, an embedded software version cannot receive a definitive `GO` verdict while physical hardware tests remain unverified. Gate QG-06 evaluation is `BLOCKED` and the formal verdict is `INSUFFICIENT_EVIDENCE`.
 
 ---
 
 ## 2. Quality Gates Status
-| Gate | Name | Evaluation | Evidence |
+| Gate | Name | Evaluation | Evidence & Rationale |
 |---|---|---|---|
-| **QG-01** | Definition Ready | **PASS** | `docs/REQUIREMENTS.md` complete |
+| **QG-01** | Definition Ready | **PASS** | `docs/REQUIREMENTS.md` complete and prioritized |
 | **QG-02** | Architecture Ready | **PASS** | `docs/ARCHITECTURE.md`, `docs/DECISIONS.md` (`ADR-001` to `ADR-003`) |
-| **QG-03** | Build Ready | **PASS** | GCC C++17 and PlatformIO firmware build cleanly |
-| **QG-04** | Audit Ready | **PASS** | Audit completed; zero open critical issues |
-| **QG-05** | Validation Ready | **INSUFFICIENT** | Host tests PASS (12/12), Hardware tests NOT_RUN (0/2) |
-| **QG-06** | Release Ready | **BLOCKED (INSUFFICIENT)** | Awaiting hardware validation |
+| **QG-03** | Build Ready | **NOT_EVALUATED** | Toolchain build unexecuted in toolkit workspace; external build unverified |
+| **QG-04** | Audit Ready | **NOT_EVALUATED** | Audit prompt prepared (`EXAMPLE_AUDIT.md`); formal report unexecuted |
+| **QG-05** | Validation Ready | **BLOCKED** | Host tests unverified (`NOT_RUN`), physical hardware tests BLOCKED |
+| **QG-06** | Release Ready | **BLOCKED** | Preceding gates unfulfilled; Release Review Decision is `INSUFFICIENT_EVIDENCE` |
 
 ---
 
 ## 3. Disclosed Limitations & Residual Risks
-- The host simulator REPL is completely validated and safe for PC-based evaluation.
-- Physical flashing to CoreS3 hardware carries the residual risk of touch-screen calibration drift until `MAT-001` is completed on physical silicon.
+- The host simulator logic is specified and modeled pedagogically, but empirical build verification in the target repo remains pending.
+- Physical flashing to CoreS3 hardware carries the residual risk of display distortion or touch-screen calibration drift until `MAT-001` is completed on physical silicon.
 
 ---
 

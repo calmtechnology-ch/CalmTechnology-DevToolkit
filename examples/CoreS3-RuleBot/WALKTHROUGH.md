@@ -32,33 +32,33 @@ This document guides you step-by-step through the engineering lifecycle of **Cor
 ## Phase 3: Bounded Implementation (`QG-03`)
 1. Generated development prompt: [`prompts/INITIAL_DEVELOPMENT.md`](prompts/INITIAL_DEVELOPMENT.md).
 2. Pure C++17 engine implemented cleanly decoupled from hardware.
-3. Clean compilation verified on host compiler (GCC/Clang) and PlatformIO (Gate QG-03: `PASS`).
+3. Clean compilation target specified on host compiler (GCC/Clang) and PlatformIO (Gate QG-03: `NOT_EVALUATED` in toolkit workspace pending local toolchain build).
 
 ---
 
 ## Phase 4: Source Code Audit (`QG-04`)
-1. Executed 10-step code audit using [`prompts/EXAMPLE_AUDIT.md`](prompts/EXAMPLE_AUDIT.md).
-2. Verified decoupling between domain logic and `M5Unified` hardware layer.
-3. Zero `CRITICAL` or `HIGH` vulnerabilities found (Gate QG-04: `PASS`).
+1. Prepared 10-step code audit prompt using [`prompts/EXAMPLE_AUDIT.md`](prompts/EXAMPLE_AUDIT.md).
+2. Verified decoupling principles between domain logic and `M5Unified` hardware layer.
+3. Formal audit report generation pending in target repository (Gate QG-04: `NOT_EVALUATED`).
 
 ---
 
 ## Phase 5: Pedagogical Defect & Corrective Release Cycle
 1. **Defect Scenario (`ISSUE-001`)**:
-   - Introduction of typo tolerance caused keyword "salut" to misclassify after modifying vowel normalization rules.
+   - Pedagogical scenario where introduction of typo tolerance caused keyword "salut" to misclassify after modifying vowel normalization rules.
 2. **Corrective Plan**:
    - Formulated minimal fix in tokenizer.
    - Generated precision prompt: [`prompts/EXAMPLE_CORRECTIVE.md`](prompts/EXAMPLE_CORRECTIVE.md).
-   - Created regression test `REG-001`.
-3. **Non-Regression Verification**:
-   - `REG-001` verified passing.
-   - Defect resolved in [`docs/KNOWN_ISSUES.md`](docs/KNOWN_ISSUES.md).
+   - Created regression test specification `REG-001`.
+3. **Non-Regression Verification (Illustrative)**:
+   - Illustrative test log modeled in `TEST_RESULTS.md` with status `RESOLVED (ILLUSTRATIVE SCENARIO)` in [`docs/KNOWN_ISSUES.md`](docs/KNOWN_ISSUES.md).
 
 ---
 
 ## Phase 6: Release Gate Review & Formal Verdict (`QG-06`)
 1. Conducted release evaluation using `release-reviewer` skill.
 2. Review report generated in [`reports/EXAMPLE_RELEASE_REVIEW.md`](reports/EXAMPLE_RELEASE_REVIEW.md).
-3. **Formal Verdict**: **`INSUFFICIENT_EVIDENCE`**
-   - *Justification*: Host simulator tests passed (`SYS-001` to `SYS-009`), but physical hardware tests on real CoreS3 device (`MAT-001`, `MAT-002`) remain `NOT_RUN`.
+3. **Quality Gate QG-06 Status**: **`BLOCKED`**
+4. **Formal Release Decision**: **`INSUFFICIENT_EVIDENCE`**
+   - *Justification*: Host simulation test specifications are unverified in this repository (`NOT_RUN`), and physical hardware acceptance tests on real CoreS3 device (`MAT-001`, `MAT-002`) are `BLOCKED` by missing target silicon.
    - In accordance with the toolkit's strict rules, an embedded release cannot be declared `GO` without physical hardware verification proof!

@@ -1,5 +1,24 @@
 # Prompt: Generate Development Prompt
 
+## 1. Quick Daily Prompt (Direct Use)
+
+> **Note**: The instruction `"Utilise CalmTechnology-DevToolkit"` assumes the toolkit path has been communicated to the assistant and its files are accessible. In a fresh conversation session, provide the relative or absolute path if necessary (e.g., `Utilise CalmTechnology-DevToolkit situé à ../CalmTechnology-DevToolkit`).
+
+```text
+Utilise CalmTechnology-DevToolkit.
+
+Prépare la prochaine évolution suivante :
+
+[Description]
+
+Préserve les fonctionnalités validées.
+Produis le plan et le prompt de réalisation.
+```
+
+---
+
+## 2. Detailed Technical Prompt (Complete Specification)
+
 ```markdown
 # TASK: Generate Scoped Development Prompt for AI Assistant
 

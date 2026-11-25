@@ -48,6 +48,10 @@ examples/CoreS3-RuleBot/
 ---
 
 ## 3. Real Project State vs. Pedagogical Scenarios
-- **Real Reference Repository**: Inspected at GitHub commit `f7f57796fa6be68d7230c15d834c63250e5c4318`.
-- **Pedagogical Fix Scenario**: Demonstrates a regression where typo tolerance broke a previously working keyword ("salut"). This scenario illustrates the complete corrective cycle from defect logging to non-regression sign-off.
-- **Pedagogical Release Decision**: Demonstrates why `INSUFFICIENT_EVIDENCE` is issued when physical hardware verification (`MAT-xxx`) is pending.
+The CoreS3-RuleBot educational case study strictly distinguishes between five categories of information:
+1. **Facts Verified in Real Repository**: Reference GitHub repository at commit `f7f57796fa6be68d7230c15d834c63250e5c4318`.
+2. **Architectural Proposals & ADRs**: Formal trade-offs (`ARCHITECTURE.md`) and accepted architectural choices (`ADR-001` to `ADR-003`).
+3. **Pedagogical Scenarios (`ILLUSTRATIVE`)**: The defect scenario `ISSUE-001` and regression test `REG-001` are educational models demonstrating the corrective lifecycle.
+4. **Execution Status vs. Empirical Proof**: Test cases (`SYS-001` to `SYS-010`) are cataloged in `TEST_PLAN.md`; unverified in this toolkit workspace (`status: NOT_RUN`, provenance `UNVERIFIED`). Illustrative logs and latency figures in `TEST_RESULTS.md` are marked `ILLUSTRATIVE`.
+5. **Hardware Tests Awaiting Confirmation**: CoreS3 physical hardware tests (`MAT-001`, `MAT-002`) are **`BLOCKED`** due to lack of connected physical silicon.
+6. **Formal Release Decision**: Demonstrates why Gate QG-06 is **`BLOCKED`** and the release verdict is strictly **`INSUFFICIENT_EVIDENCE`** when hardware verification is pending.

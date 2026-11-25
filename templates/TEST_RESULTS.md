@@ -1,6 +1,9 @@
 # Empirical Test Results: [Project Name]
 
-> **EVIDENCE NOTICE**: This document records **empirical evidence** from actual test runs. An unexecuted test must NEVER be marked as `PASS`. If a test was not run, its status is strictly `NOT_RUN`. User-reported outcomes must be explicitly designated as `USER_REPORTED`.
+> **EVIDENCE NOTICE**: This document records **empirical evidence** from actual test runs.
+> - **Authorized Test Statuses**: `NOT_RUN`, `PASS`, `FAIL`, `BLOCKED`, `NOT_APPLICABLE`.
+> - **Evidence Provenance Categories**: `DIRECTLY_VERIFIED`, `USER_REPORTED`, `EXTERNAL_REPORTED`, `ILLUSTRATIVE`, `UNVERIFIED`.
+> - An unexecuted test must NEVER be marked as `PASS`. If execution was not undertaken, status is strictly `NOT_RUN`. If prevented by missing equipment, status is `BLOCKED`. User-reported outcomes must be explicitly designated with provenance `USER_REPORTED`.
 
 ---
 
@@ -10,17 +13,18 @@
 - **Execution Date**: YYYY-MM-DD
 - **Test Operator**: [Developer Name / Automated CI]
 - **Execution Environment**: [e.g., Windows 11 Host / Ubuntu Linux / Physical M5Stack CoreS3]
+- **Overall Evidence Provenance**: [DIRECTLY_VERIFIED / USER_REPORTED / EXTERNAL_REPORTED / ILLUSTRATIVE / UNVERIFIED]
 
 ---
 
 ## 2. Test Execution Summary Matrix
 
-| Test ID | Tier | Target Req / Issue | Executed Status | Duration / Latency | Operator / Source |
-|---|---|---|---|---|---|
-| `SYS-001` | SYS | `REQ-F-001` | NOT_RUN | — | — |
-| `SYS-002` | SYS | `REQ-F-002` | NOT_RUN | — | — |
-| `MAT-001` | MAT | `REQ-NF-001` | NOT_RUN | — | — |
-| `REG-001` | REG | `ISSUE-001` | NOT_RUN | — | — |
+| Test ID | Tier | Target Req / Issue | Execution Status | Duration / Latency | Evidence Provenance | Notes / Operator |
+|---|---|---|---|---|---|---|
+| `SYS-001` | SYS | `REQ-F-001` | NOT_RUN | — | UNVERIFIED | — |
+| `SYS-002` | SYS | `REQ-F-002` | NOT_RUN | — | UNVERIFIED | — |
+| `MAT-001` | MAT | `REQ-NF-001` | NOT_RUN | — | UNVERIFIED | Pending physical hardware |
+| `REG-001` | REG | `ISSUE-001` | NOT_RUN | — | UNVERIFIED | — |
 
 ---
 
@@ -28,7 +32,8 @@
 
 ### Test `SYS-001`: [Test Title]
 - **Execution Timestamp**: YYYY-MM-DD HH:MM:SS
-- **Status**: [PASS / FAIL / BLOCKED / NOT_RUN]
+- **Execution Status**: [PASS / FAIL / BLOCKED / NOT_RUN / NOT_APPLICABLE]
+- **Evidence Provenance**: [DIRECTLY_VERIFIED / USER_REPORTED / EXTERNAL_REPORTED / ILLUSTRATIVE / UNVERIFIED]
 - **Command Executed**:
   ```bash
   [command line used to run test]
@@ -44,7 +49,8 @@
 ### Test `MAT-001`: [Hardware Test Title]
 - **Execution Timestamp**: YYYY-MM-DD HH:MM:SS
 - **Target Device**: Physical M5Stack CoreS3
-- **Status**: [PASS / FAIL / BLOCKED / NOT_RUN]
+- **Execution Status**: [PASS / FAIL / BLOCKED / NOT_RUN / NOT_APPLICABLE]
+- **Evidence Provenance**: [DIRECTLY_VERIFIED / USER_REPORTED / EXTERNAL_REPORTED / ILLUSTRATIVE / UNVERIFIED]
 - **Serial Console Capture**:
   ```text
   [Paste serial monitor log here]

@@ -1,5 +1,22 @@
 # Prompt: Import Existing Project
 
+## 1. Quick Daily Prompt (Direct Use)
+
+> **Note**: The instruction `"Utilise CalmTechnology-DevToolkit"` assumes the toolkit path has been communicated to the assistant and its files are accessible. In a fresh conversation session, provide the relative or absolute path if necessary (e.g., `Utilise CalmTechnology-DevToolkit situé à ../CalmTechnology-DevToolkit`).
+
+```text
+Utilise CalmTechnology-DevToolkit.
+
+Examine ce projet existant et initialise
+sa documentation à partir du code réel.
+
+Ne modifie aucun fichier source.
+```
+
+---
+
+## 2. Detailed Technical Prompt (Complete Specification)
+
 ```markdown
 # TASK: Import and Reconstruct Existing Codebase State
 

@@ -19,16 +19,16 @@ CalmTechnology-DevToolkit decouples project knowledge from transient chat window
 
 ```mermaid
 graph TD
-    User([Developer]) --> Prompts[prompts/ Reusable Prompts]
+    User([Developer]) --> Prompts[prompts/ Quick & Detailed Prompts]
     Prompts --> Agent[AI Assistant]
-    Agent --> Skills[skills/ Engineering Skills]
-    Agent --> Workflows[workflows/ Standard Workflows]
-    Agent --> Profiles[profiles/ Hardware & Tech Profiles]
+    Agent --> Skills[skills/ 8 Engineering Skills]
+    Agent --> Workflows[workflows/ 7 Standard Workflows]
+    Agent --> Profiles[profiles/ 6 Technical Profiles]
     Agent --> Memory[(docs/ Living Project State)]
 ```
 
 ### 2.1 The 8 Specialized Skills (`skills/`)
-Each skill represents a specialized engineering role governed by a strict 12-section contract. You can invoke skills individually or let workflows sequence them:
+Each skill represents a specialized engineering role governed by a strict 12-section contract:
 1. `project-definition`: Turns ideas into testable requirements (`REQ-F-xxx`, `REQ-NF-xxx`).
 2. `software-architect`: Decomposes systems into modules, interfaces, and ADRs (`ADR-xxx`).
 3. `embedded-engineer`: Enforces memory budgets (SRAM, PSRAM), RTOS tasks, and hardware limits.
@@ -36,10 +36,9 @@ Each skill represents a specialized engineering role governed by a strict 12-sec
 5. `prompt-generator`: Writes laser-focused, bounded prompts for implementation and bugfixes.
 6. `code-auditor`: Performs objective 10-step inspections of real source code.
 7. `test-engineer`: Establishes test plans and records empirical test evidence.
-8. `release-reviewer`: Impartially evaluates Quality Gate QG-06 (`GO`, `CONDITIONAL_GO`, `NO_GO`, `INSUFFICIENT_EVIDENCE`).
+8. `release-reviewer`: Impartially evaluates Quality Gate QG-06 and issues release verdicts (`GO`, `CONDITIONAL_GO`, `NO_GO`, `INSUFFICIENT_EVIDENCE`).
 
 ### 2.2 The 7 Workflows (`workflows/`)
-Workflows provide prescriptive paths through the engineering lifecycle:
 - `new-project.md`: From greenfield concept to validated MVP release.
 - `existing-project.md`: Onboarding brownfield code without modifying source during import.
 - `feature-development.md`: Safely adding new capabilities without regressing existing features.
@@ -50,17 +49,110 @@ Workflows provide prescriptive paths through the engineering lifecycle:
 
 ---
 
-## 3. Maintaining the Living Project State (`PROJECT_STATE.md`)
-The single most important document in your repository is `docs/PROJECT_STATE.md`. It must be maintained with complete accuracy:
-- **Validated Features**: Once a feature is proven operational via passing test suites, it is entered here. Validated features are strictly protected from opportunistic rewrites.
-- **Unvalidated Work**: Code currently under development or awaiting hardware verification.
-- **Defects Summary**: Count of open issues from `KNOWN_ISSUES.md`.
-- **Recommended Next Action**: Eliminates ambiguity on what the developer or AI assistant should work on next.
+## 3. Shared Workspace Setup & Path Resolution
+
+The toolkit is designed to be shared across multiple projects without duplicating repositories:
+
+```text
+Documents/
+└── Antigravity-5.1/
+    ├── CalmTechnology-DevToolkit/   # Shared toolkit
+    ├── ProjectA/                    # Target project with own docs/ and src/
+    └── ProjectB/                    # Target project with own docs/ and src/
+```
+
+- In your prompt, provide the relative path (e.g., `../CalmTechnology-DevToolkit`) or absolute path.
+- **Inaccessibility Reporting**: If the assistant cannot access the toolkit path, it must report the issue rather than hallucinating rules.
 
 ---
 
-## 4. Best Practices for Developers Working with AI
-1. **Never start a turn without pointing to `PROJECT_STATE.md`**.
-2. **Review before merging**: Use `workflows/code-audit.md` before merging pull requests.
-3. **Enforce hardware testing for embedded targets**: If you are developing for ESP32 or CoreS3, insist on physical validation (`MAT-xxx`) before tagging a release.
-4. **Resist feature bundling in bug fixes**: When fixing a bug, keep the prompt laser-focused on the defect locus.
+## 4. Minimal Daily Operating Procedure (9 Steps)
+
+You do not need to manually select dozens of files for routine tasks. Follow this 9-step operating cycle:
+1. **Identify Target Project**: Open or point to the project directory.
+2. **Read `AGENTS.md`**: Establish operational rules of engagement.
+3. **Read `docs/PROJECT_STATE.md`**: Consult the living project truth.
+4. **Identify the Workflow**: Match user intent to the lifecycle path.
+5. **Load Primary Skill**: Selectively load only the required skill and profile.
+6. **Examine Relevant Files**: Inspect actual code, build configs, or tests.
+7. **Perform Authorized Task**: Execute bounded changes with zero scope creep.
+8. **Update Affected Documents**: Record changes in `PROJECT_STATE.md` and related files.
+9. **Present Concise Summary**: Provide transparent, proportional reporting.
+
+---
+
+## 5. Selective Document Loading Matrix
+
+| User Request | Active Workflow | Primary Skill | Relevant Templates & Profiles |
+|---|---|---|---|
+| Initialize new project | `workflows/new-project.md` | `skills/project-definition` | `templates/PROJECT.md`, `REQUIREMENTS.md`, profile |
+| Import existing codebase | `workflows/existing-project.md` | `skills/code-auditor` | `templates/PROJECT_STATE.md`, `KNOWN_ISSUES.md` |
+| Add new feature | `workflows/feature-development.md` | `skills/software-architect` | `prompts/generate-development-prompt.md`, profile |
+| Audit source code | `workflows/code-audit.md` | `skills/code-auditor` | `templates/AUDIT_REPORT.md`, `KNOWN_ISSUES.md` |
+| Fix a defect | `workflows/corrective-release.md` | `skills/code-auditor` | `prompts/generate-corrective-prompt.md`, `CORRECTIVE_PLAN.md` |
+| Validate changes / tests | `workflows/regression-testing.md` | `skills/test-engineer` | `templates/TEST_PLAN.md`, `TEST_RESULTS.md` |
+| Prepare release review | `workflows/public-release.md` | `skills/release-reviewer` | `templates/RELEASE_CHECKLIST.md`, `RELEASE_REPORT.md` |
+
+---
+
+## 6. The 3 Common Everyday Situations
+
+### Situation A — Creating a New Project
+Send the quick prompt:
+```text
+Utilise CalmTechnology-DevToolkit.
+Initialise la documentation de ce projet selon le workflow new-project.
+Ne commence pas à programmer.
+```
+Follow the interactive definition phase, formulate requirements in `docs/REQUIREMENTS.md`, and evaluate Gate QG-01.
+
+### Situation B — Importing an Existing Codebase
+Send the quick prompt:
+```text
+Utilise CalmTechnology-DevToolkit.
+Examine ce projet existant et initialise sa documentation à partir du code réel.
+Ne modifie aucun fichier source.
+```
+The assistant inspects actual code, reconstructs baseline state in `docs/PROJECT_STATE.md`, and identifies next actions without editing source code.
+
+### Situation C — Resuming an Integrated Project
+Send the quick prompt:
+```text
+Utilise CalmTechnology-DevToolkit.
+Lis PROJECT_STATE.md, vérifie l'état réel du projet et propose la prochaine étape.
+Ne modifie pas le code.
+```
+The assistant syncs on current truth, checks validated protected features, and proposes bounded execution.
+
+---
+
+## 7. Document Single Responsibility & Proportional Updates
+
+To keep documentation lean and actionable:
+- Do not rewrite every document after a localized fix.
+- Use stable IDs (`REQ-xxx`, `ADR-xxx`, `ISSUE-xxx`, `SYS-xxx`) to reference details.
+- Keep `PROJECT_STATE.md` concise.
+
+| Document | Primary Responsibility |
+|---|---|
+| `PROJECT.md` | Identity, objectives, scope boundaries |
+| `REQUIREMENTS.md` | Functional & non-functional requirements and acceptance criteria |
+| `ARCHITECTURE.md` | Modular decomposition, contracts, data flows |
+| `DECISIONS.md` | Architecture Decision Records (ADRs) |
+| `PROJECT_STATE.md` | Living synthesis of current state, validated capabilities, next action |
+| `TEST_PLAN.md` | Catalog of specified test cases |
+| `TEST_RESULTS.md` | Empirical test execution logs, timestamps, metrics, provenance |
+| `KNOWN_ISSUES.md` | Confirmed defects and resolution tracking |
+
+---
+
+## 8. Evidence Rigor & Status Separation
+
+### Quality Gate Statuses vs Release Decisions
+- **Quality Gate Statuses** (`docs/QUALITY_GATES.md`): Strictly `PASS`, `FAIL`, `BLOCKED`, `NOT_EVALUATED`, `NOT_APPLICABLE`.
+- **Release Decisions**: `GO`, `CONDITIONAL_GO`, `NO_GO`, `INSUFFICIENT_EVIDENCE`.
+
+### Test Execution Statuses & Evidence Provenance
+- **Test Statuses**: `NOT_RUN`, `PASS`, `FAIL`, `BLOCKED`, `NOT_APPLICABLE`.
+- **Evidence Provenance**: `DIRECTLY_VERIFIED`, `USER_REPORTED`, `EXTERNAL_REPORTED`, `ILLUSTRATIVE`, `UNVERIFIED`.
+- An unexecuted test is strictly `NOT_RUN` (or `BLOCKED`). Successful compilation does not prove runtime validity.

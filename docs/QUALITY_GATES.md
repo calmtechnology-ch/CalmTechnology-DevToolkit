@@ -65,9 +65,30 @@ flowchart LR
 ---
 
 ## 3. Authorized Evaluation Statuses
-Every Quality Gate must receive one of the following formal statuses:
-- **`PASS`**: All gate criteria fully satisfied with empirical evidence.
-- **`FAIL`**: One or more gate criteria explicitly failed.
-- **`BLOCKED`**: Progress halted due to external dependency or missing equipment.
-- **`NOT_EVALUATED`**: Gate not yet evaluated for the current version.
-- **`NOT_APPLICABLE`**: Gate does not apply to current project type (e.g., PlatformIO build gate for a pure documentation project).
+`docs/QUALITY_GATES.md` serves as the sole normative reference for Quality Gate evaluation statuses. Every Quality Gate must receive exactly one of the following five authorized formal statuses:
+
+| Status | Meaning / Criteria |
+|---|---|
+| **`PASS`** | All mandatory applicable conditions for this gate are fully satisfied with verifiable evidence. |
+| **`FAIL`** | At least one mandatory condition has been evaluated and is not satisfied. |
+| **`BLOCKED`** | Gate evaluation or validation is prevented by an identified missing prerequisite (e.g., missing equipment, blocking defect). |
+| **`NOT_EVALUATED`** | The checkpoint has not yet been evaluated for the current version or milestone. |
+| **`NOT_APPLICABLE`** | The checkpoint does not apply to the current project type or configuration, with documented justification. |
+
+---
+
+## 4. Strict Separation of State Categories
+
+To ensure unambiguous communication and epistemic rigor, the following six state categories must NEVER be confused or interchanged:
+
+1. **Quality Gate Status**: Evaluates gate criteria (`PASS`, `FAIL`, `BLOCKED`, `NOT_EVALUATED`, `NOT_APPLICABLE`).
+2. **Test Execution Status**: Outcome of a test case (`NOT_RUN`, `PASS`, `FAIL`, `BLOCKED`, `NOT_APPLICABLE`).
+3. **Development Phase**: Active lifecycle stage (`DEFINITION`, `ARCHITECTURE`, `IMPLEMENTATION`, `AUDIT`, `VALIDATION`, `RELEASE_READY`, etc.).
+4. **Defect Status**: Issue tracking state (`OPEN`, `UNDER_INVESTIGATION`, `FIX_PROPOSED`, `RESOLVED`, `WONT_FIX`).
+5. **Release Decision**: Verdict of a release review (`GO`, `CONDITIONAL_GO`, `NO_GO`, `INSUFFICIENT_EVIDENCE`).
+6. **Evidence Provenance**: Origin and reliability of claims (`DIRECTLY_VERIFIED`, `USER_REPORTED`, `EXTERNAL_REPORTED`, `ILLUSTRATIVE`, `UNVERIFIED`).
+
+> [!IMPORTANT]
+> - `INSUFFICIENT_EVIDENCE` is strictly a **Release Decision** (or finding evaluation), NOT an authorized Quality Gate status.
+> - `IN_PROGRESS` describes ongoing activity or phase progress; it must NEVER be used as a Quality Gate evaluation status (use `BLOCKED` or `NOT_EVALUATED` until formal evaluation).
+> - `PENDING` is obsolete and must be resolved to either `NOT_EVALUATED` (if awaiting campaign start) or `BLOCKED` (if prevented by an unfulfilled prerequisite).

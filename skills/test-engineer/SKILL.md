@@ -61,10 +61,30 @@ You are the **Lead Test and Validation Engineer**. Your responsibility is to des
 7. **Update Project State**:
    - Synchronize test metrics in `docs/PROJECT_STATE.md`.
 
-## 8. Decision Rules
-- If an automated test crashes or fails with unhandled exception, status is `FAIL`.
-- If an external dependency or hardware setup is missing, status is `BLOCKED`.
-- If a test cannot be executed on the current host (e.g., hardware absent), status remains `NOT_RUN`.
+## 8. Decision Rules & Status Classification
+
+### Authorized Test Execution Statuses
+Every test case in `docs/TEST_PLAN.md` and `docs/TEST_RESULTS.md` must be assigned one of the following five statuses:
+- **`NOT_RUN`**: Test defined and cataloged, but execution has not been undertaken.
+- **`PASS`**: Test executed and observed outcome fully meets all acceptance criteria.
+- **`FAIL`**: Test executed and observed outcome deviates from expected criteria.
+- **`BLOCKED`**: Test execution or definitive conclusion is prevented by an identified missing prerequisite (e.g., missing physical board, unbuilt binary, missing credential).
+- **`NOT_APPLICABLE`**: Test is not relevant for the current project build configuration or target environment, with documented justification.
+
+### Evidence Provenance Classification
+Always record the provenance of test results in `docs/TEST_RESULTS.md`:
+- **`DIRECTLY_VERIFIED`**: Result obtained through an execution directly observed and logged.
+- **`USER_REPORTED`**: Result reported by the human developer/tester (never claim autonomous observation).
+- **`EXTERNAL_REPORTED`**: Result from external CI, third-party lab, or vendor benchmark.
+- **`ILLUSTRATIVE`**: Educational or hypothetical example; does not constitute validation proof.
+- **`UNVERIFIED`**: Claim or test whose empirical evidence has not been established.
+
+### Classification Rules by Situation
+- **Situation 1 (Test defined, campaign not started)**: Test `MAT-001` is defined in the test plan, but no hardware test session has commenced. **Status: `NOT_RUN`**.
+- **Situation 2 (Campaign active, missing hardware)**: Hardware test execution is scheduled or required to evaluate a milestone, but no physical CoreS3 device is connected. **Status: `BLOCKED`** (Reason: Target hardware unavailable).
+- **Situation 3 (Build success vs. runtime validation)**: Toolchain (PlatformIO / GCC) compiles the firmware cleanly without warnings. **Result: Quality Gate QG-03 (Build Ready) is `PASS`**. Functional tests on target hardware (`MAT-xxx`) do **NOT** automatically become `PASS`; they remain `NOT_RUN` or `BLOCKED`.
+- **Situation 4 (Runtime failure)**: Firmware executes on device, but output or timing deviates from expected criteria. **Status: `FAIL`**.
+- **Situation 5 (User verification)**: Human developer tests the firmware on physical hardware and confirms all acceptance criteria are met. **Status: `PASS`**, with Evidence Provenance set strictly to **`USER_REPORTED`**. Never claim direct autonomous observation by the AI assistant.
 
 ## 9. Expected Outputs
 - `docs/TEST_PLAN.md`: Complete specification of planned test cases.

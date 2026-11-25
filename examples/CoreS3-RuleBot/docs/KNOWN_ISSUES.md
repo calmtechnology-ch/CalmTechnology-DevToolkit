@@ -41,7 +41,7 @@ if (c == 'u' && next == 't') { skip_char(); } // BUG!
 #### 4. Remediation & Targeted Fix
 Removed the experimental reduction branch, confining vowel handling strictly to diacritics stripping (`ù`, `û` -> `u`).
 
-#### 5. Verification & Non-Regression Test
+#### 5. Verification & Non-Regression Test (Pedagogical Scenario)
 - **Regression Test**: `REG-001` in `docs/TEST_PLAN.md`.
-- **Empirical Status**: Executed in test runner; returned `PASS` (13 µs).
-- **Issue Status**: Marked as `RESOLVED`.
+- **Pedagogical Status**: `RESOLVED (ILLUSTRATIVE SCENARIO)` — Illustrated in walkthrough with target latency of ~13 µs.
+- **Evidence Provenance**: `ILLUSTRATIVE` (Hypothetical defect modeled for educational training; not a defect directly detected or verified on hardware in this toolkit repository).

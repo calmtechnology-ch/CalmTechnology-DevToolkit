@@ -18,12 +18,12 @@
 ## 2. Executive Status & Quality Gates
 | Quality Gate | Title | Current Status | Last Evaluated | Evidence Document |
 |---|---|---|---|---|
-| **QG-01** | Definition Ready | [PASS / PENDING / NOT_EVALUATED] | YYYY-MM-DD | `docs/REQUIREMENTS.md` |
-| **QG-02** | Architecture Ready | [PASS / PENDING / NOT_EVALUATED] | YYYY-MM-DD | `docs/ARCHITECTURE.md` |
-| **QG-03** | Build Ready | [PASS / PENDING / NOT_EVALUATED] | YYYY-MM-DD | Build console log |
-| **QG-04** | Audit Ready | [PASS / PENDING / NOT_EVALUATED] | YYYY-MM-DD | `docs/AUDIT_REPORT.md` |
-| **QG-05** | Validation Ready | [PASS / PENDING / NOT_EVALUATED] | YYYY-MM-DD | `docs/TEST_RESULTS.md` |
-| **QG-06** | Release Ready | [PASS / PENDING / NOT_EVALUATED] | YYYY-MM-DD | `docs/RELEASE_REPORT.md` |
+| **QG-01** | Definition Ready | [PASS / FAIL / BLOCKED / NOT_EVALUATED / NOT_APPLICABLE] | YYYY-MM-DD | `docs/REQUIREMENTS.md` |
+| **QG-02** | Architecture Ready | [PASS / FAIL / BLOCKED / NOT_EVALUATED / NOT_APPLICABLE] | YYYY-MM-DD | `docs/ARCHITECTURE.md` |
+| **QG-03** | Build Ready | [PASS / FAIL / BLOCKED / NOT_EVALUATED / NOT_APPLICABLE] | YYYY-MM-DD | Build console log |
+| **QG-04** | Audit Ready | [PASS / FAIL / BLOCKED / NOT_EVALUATED / NOT_APPLICABLE] | YYYY-MM-DD | `docs/AUDIT_REPORT.md` |
+| **QG-05** | Validation Ready | [PASS / FAIL / BLOCKED / NOT_EVALUATED / NOT_APPLICABLE] | YYYY-MM-DD | `docs/TEST_RESULTS.md` |
+| **QG-06** | Release Ready | [PASS / FAIL / BLOCKED / NOT_EVALUATED / NOT_APPLICABLE] | YYYY-MM-DD | `docs/RELEASE_REPORT.md` |
 
 ---
 
@@ -62,6 +62,7 @@
 - **Failed**: [Count]
 - **Blocked**: [Count]
 - **Not Run**: [Count]
+- **Not Applicable**: [Count]
 - **Hardware Verified**: [YES / NO / PARTIAL]
 
 ---

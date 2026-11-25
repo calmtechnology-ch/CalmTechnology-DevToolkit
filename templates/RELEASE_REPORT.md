@@ -18,12 +18,12 @@
 ## 2. Quality Gates Status Summary
 | Gate | Name | Evaluation | Primary Evidence |
 |---|---|---|---|
-| **QG-01** | Definition Ready | PASS | `docs/REQUIREMENTS.md` |
-| **QG-02** | Architecture Ready | PASS | `docs/ARCHITECTURE.md`, `docs/DECISIONS.md` |
-| **QG-03** | Build Ready | PASS | Clean compiler logs |
-| **QG-04** | Audit Ready | PASS | `docs/AUDIT_REPORT.md` (0 Critical/High issues) |
-| **QG-05** | Validation Ready | [PASS / INSUFFICIENT] | `docs/TEST_RESULTS.md` |
-| **QG-06** | Release Ready | [PASS / CONDITIONAL / NO_GO] | `docs/RELEASE_CHECKLIST.md` |
+| **QG-01** | Definition Ready | [PASS / FAIL / BLOCKED / NOT_EVALUATED / NOT_APPLICABLE] | `docs/REQUIREMENTS.md` |
+| **QG-02** | Architecture Ready | [PASS / FAIL / BLOCKED / NOT_EVALUATED / NOT_APPLICABLE] | `docs/ARCHITECTURE.md`, `docs/DECISIONS.md` |
+| **QG-03** | Build Ready | [PASS / FAIL / BLOCKED / NOT_EVALUATED / NOT_APPLICABLE] | Clean compiler logs |
+| **QG-04** | Audit Ready | [PASS / FAIL / BLOCKED / NOT_EVALUATED / NOT_APPLICABLE] | `docs/AUDIT_REPORT.md` (0 Critical/High issues) |
+| **QG-05** | Validation Ready | [PASS / FAIL / BLOCKED / NOT_EVALUATED / NOT_APPLICABLE] | `docs/TEST_RESULTS.md` |
+| **QG-06** | Release Ready | [PASS / FAIL / BLOCKED / NOT_EVALUATED / NOT_APPLICABLE] | `docs/RELEASE_CHECKLIST.md` |
 
 ---
 
@@ -31,8 +31,11 @@
 - **Total Test Cases**: [Total]
 - **Passed**: [Count]
 - **Failed**: [Count]
+- **Blocked**: [Count]
 - **Not Run**: [Count]
-- **Hardware Acceptance Tests (`MAT-xxx`)**: [VERIFIED ON REAL HARDWARE / NOT_RUN / SIMULATED ONLY]
+- **Not Applicable**: [Count]
+- **Evidence Provenance**: [DIRECTLY_VERIFIED / USER_REPORTED / EXTERNAL_REPORTED / ILLUSTRATIVE / UNVERIFIED]
+- **Hardware Acceptance Tests (`MAT-xxx`)**: [VERIFIED ON REAL HARDWARE / NOT_RUN / BLOCKED / SIMULATED ONLY]
 
 > *Note: For embedded releases, absence of physical hardware validation strictly prohibits a definitive `GO` verdict.*
 

@@ -43,3 +43,29 @@ flowchart TD
       └── SYS-001 / MAT-001 (Verification Test)
   ```
 - **Protected State**: Features once validated are permanently protected against regression unless an explicit architectural revision is approved.
+
+---
+
+## 3. Proportional Documentation Overhead
+The toolkit is designed to support the developer, not impose administrative bureaucracy.
+
+### General Rules for Documentation Updates
+- **Update only affected information**: Never rewrite all documentation files after a localized change.
+- **Avoid redundant duplication**: Use stable identifiers (`REQ-xxx`, `ADR-xxx`, `ISSUE-xxx`, `SYS-xxx`) to reference details rather than copy-pasting full text across files.
+- **Proportional audits**: Do not generate an audit report for a simple typo or single-variable fix.
+- **Proportional decisions**: Do not author an ADR for minor routine refactorings; reserve ADRs for genuine architectural trade-offs.
+- **Keep `PROJECT_STATE.md` concise**: It must serve as a high-level index that developers and AI assistants can digest rapidly.
+- **Empirical freshness**: Outdated state documents never supersede recent empirical test or build results.
+
+### Document Single Responsibility Matrix
+
+| Document | Primary Responsibility |
+|---|---|
+| `PROJECT.md` | Project identity, charter, high-level objectives, and out-of-scope boundaries |
+| `REQUIREMENTS.md` | Functional and non-functional requirements and testable acceptance criteria |
+| `ARCHITECTURE.md` | Modular decomposition, component contracts, data flows, and constraints |
+| `DECISIONS.md` | Architecture Decision Records (ADRs) capturing major trade-offs and rationale |
+| `PROJECT_STATE.md` | Living synthesis of current state, validated capabilities, and next action |
+| `TEST_PLAN.md` | Catalog of specified test cases and execution protocols |
+| `TEST_RESULTS.md` | Empirical test execution logs, timestamps, metrics, and evidence provenance |
+| `KNOWN_ISSUES.md` | Defect registry, reproduction steps, root cause analysis, and resolution tracking |

@@ -14,41 +14,63 @@ This document governs the behavior, decision-making, and execution protocols for
 
 ## 2. Mandatory Rules of Engagement
 
-### Rule 1 — Read Before Action
-- **Mandatory Pre-Flight**: If `docs/PROJECT_STATE.md` exists in the target project, the agent **MUST** read it before suggesting or performing any modifications.
-- **Inspect Actual Code**: Never infer the implementation from `README.md` or high-level descriptions. Read the actual source files, build scripts, and tests.
+### Rule 1 — Read Before Action & Verification of Reality
+- **Mandatory Pre-Flight**: If `docs/PROJECT_STATE.md` exists in the target project, the agent **MUST** read it first and cross-check its consistency against actual codebase files before suggesting or performing any modifications.
+- **Inspect Actual Code**: Never infer the implementation from `README.md` or high-level descriptions. Read the actual source files, build scripts, and test files.
+- **Do Not Presume Accuracy**: Never assume a document is accurate or up-to-date merely because it exists. An outdated state document must never supersede recent empirical evidence.
 - **Missing Information**: If a file is missing or unreadable, explicitly state that it cannot be accessed. Never fabricate its contents.
 
 ### Rule 2 — Strict Scope Compliance
 - Modify **only** the files and components authorized by the user prompt or active workflow.
-- In corrective phases, focus strictly on the targeted defect. Never introduce opportunistic new features or major refactorings during a bugfix.
+- **Analysis vs. Implementation**: An analysis request (e.g., audit, review, inspection) is **NOT** an authorization to write or edit source code.
+- **Prompt Generation vs. Implementation**: A request to generate a prompt is **NOT** an authorization to execute the implementation.
+- In corrective phases, focus strictly on the targeted defect locus. Never introduce opportunistic new features or major refactorings during a bugfix.
 - If an architectural change is discovered to be necessary, present it as a decision proposal before executing it.
 
 ### Rule 3 — Active Feature Preservation & Regression Prevention
 - Features marked as **Validated** in `PROJECT_STATE.md` or `TEST_RESULTS.md` are protected.
-- Never modify existing working code without explicit architectural justification and a corresponding regression test plan.
+- Any modification touching or risking a protected feature must be explicitly justified, user-authorized, and accompanied by a regression test strategy.
+- If regression tests cannot be executed (e.g., lack of hardware or environment), explicitly flag this limitation and residual risk to the user.
 - Before concluding any task, verify that previously validated behavior has not been degraded.
 
-### Rule 4 — Zero Fabrication of Test Results
-- **NEVER** declare a feature operational simply because compilation succeeded.
-- **NEVER** mark an unexecuted test as `PASS`. If a test has not been executed, its status is strictly `NOT_RUN`.
+### Rule 4 — Zero Fabrication & Evidence Provenance Rigor
+- **Authorized Test Statuses**: Use strictly the 5 authorized statuses:
+  - `NOT_RUN`: Test defined but not undertaken.
+  - `PASS`: Test executed with result meeting acceptance criteria.
+  - `FAIL`: Test executed with result failing acceptance criteria.
+  - `BLOCKED`: Execution or evaluation prevented by an identified missing prerequisite (e.g., absent hardware).
+  - `NOT_APPLICABLE`: Test not pertinent for project or configuration, with documented justification.
+- **Evidence Provenance Classification**: Always disclose the origin of results:
+  - `DIRECTLY_VERIFIED`: Result obtained through directly observed execution.
+  - `USER_REPORTED`: Result communicated by the human user.
+  - `EXTERNAL_REPORTED`: Result from an identifiable external benchmark or source.
+  - `ILLUSTRATIVE`: Pedagogical example; does NOT constitute a confirmed validation.
+  - `UNVERIFIED`: Claim whose empirical proof has not been established.
+- **NEVER** declare a feature operational simply because compilation succeeded. Static build PASS does not equate to functional runtime validation.
+- **NEVER** mark an unexecuted test as `PASS`. If a test has not been executed, its status is strictly `NOT_RUN` (or `BLOCKED` if execution was attempted but halted by missing equipment).
 - **Hardware & Environment Distinctions**: Always differentiate:
   1. Static compilation.
   2. Host simulation / unit tests.
   3. Real hardware execution (e.g., M5Stack CoreS3, ESP32).
-- When recording user feedback or external test reports, record them as *user-reported*, without claiming direct autonomous observation.
 
-### Rule 5 — Explicit State and Version Management
-- When a task completes, update `PROJECT_STATE.md` and related documents (`REQUIREMENTS.md`, `TEST_RESULTS.md`, `KNOWN_ISSUES.md`).
-- Clearly mark the date, target version, known issues, validated features, and recommended next action.
-- Distinguish obsolete decisions from active decisions using Architecture Decision Records (`DECISIONS.md`).
+### Rule 5 — Proportional State & Documentation Updates
+- Update **only** the documents directly concerned by the completed task.
+- A read-only analysis or code inspection must NOT trigger documentation updates unless explicitly requested.
+- Avoid unnecessary duplication across documents; reference stable identifiers (`REQ-xxx`, `ADR-xxx`, `ISSUE-xxx`, `SYS-xxx`).
+- Keep `PROJECT_STATE.md` concise and high-level; detailed records belong in specialized registries.
+- Clearly record the date, target version, known issues, validated features, and recommended next action.
 
-### Rule 6 — Transparent Reporting
-- At the end of every turn or task, explicitly list:
-  1. What was accomplished.
-  2. What was intentionally omitted or left pending.
-  3. Decisions requiring user approval.
-  4. The next recommended step according to the active workflow.
+### Rule 6 — Proportional and Transparent Reporting
+- Adapt reporting volume to task complexity:
+  - For simple, focused tasks: provide a concise, direct summary.
+  - For major milestones or releases: systematically detail:
+    1. What was accomplished.
+    2. Files modified or created.
+    3. Verifications executed and commands used.
+    4. Observed results with evidence provenance.
+    5. Limitations, unexecuted checks, or residual risks.
+    6. Next recommended step according to the active workflow.
+- Do not impose a heavy administrative report for minor typographical or single-line fixes.
 
 ---
 

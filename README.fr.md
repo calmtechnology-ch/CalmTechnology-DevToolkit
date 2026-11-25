@@ -1,6 +1,6 @@
 # CalmTechnology-DevToolkit
 
-> **Version 0.1.0 — Foundation**  
+> **Version 0.1.0.1 — Corrective**  
 > Cadre méthodologique pour un développement logiciel assisté par IA rigoureux, traçable et fondé sur les preuves.  
 > Organisation : [calmtechnology-ch](https://github.com/calmtechnology-ch) | Licence : MIT
 
@@ -34,56 +34,76 @@ flowchart LR
 
 ## 3. Ce que le toolkit propose (et ce qu'il exclut)
 
-### Ce qui est disponible dans la version 0.1.0 (Foundation)
+### Composants fondamentaux préservés (socle v0.1.0)
 - **8 Compétences spécialisées (`skills/`)** : Rôles d'ingénierie documentés avec en-têtes YAML et 12 sections normées.
 - **7 Workflows opérationnels (`workflows/`)** : Processus directeurs pour nouveaux projets, reprise d'existant, nouvelles fonctionnalités, audits de code, releases correctives, campagnes de régression et publications.
 - **12 Modèles documentaires (`templates/`)** : Fiches prêtes à l'emploi pour exigences, architecture, décisions d'architecture (ADR), état du projet, plans et résultats de tests.
 - **6 Profils techniques (`profiles/`)** : Fiches de contraintes matérielles et logicielles pour ESP32, CoreS3, applications vocales, Web, Electron et Python.
-- **8 Prompts réutilisables (`prompts/`)** : Prompts structurés prêts à copier pour les assistants IA (Antigravity, Claude, ChatGPT, etc.).
-- **Exemple pédagogique complet (`examples/CoreS3-RuleBot/`)** : Scénario d'ingénierie fondé sur le projet réel open-source CoreS3-RuleBot.
-- **Grille de contrôle Quality Gates (`docs/QUALITY_GATES.md`)** : 6 points de contrôle formels (QG-01 à QG-06).
+- **8 Prompts réutilisables (`prompts/`)** : Prompts prêts à l'emploi dotés d'un format court quotidien et d'une spécification technique complète.
+- **Exemple pédagogique complet (`examples/CoreS3-RuleBot/`)** : Scénario d'ingénierie fondé sur le projet open-source CoreS3-RuleBot.
+- **Grille de contrôle Quality Gates (`docs/QUALITY_GATES.md`)** : 6 points de contrôle formels (`QG-01` à `QG-06`) aux statuts normés (`PASS`, `FAIL`, `BLOCKED`, `NOT_EVALUATED`, `NOT_APPLICABLE`).
 
-### Périmètre strict de la version 0.1.0
+### Améliorations de la version 0.1.0.1 (Corrective)
+- Texte intégral canonique de la licence MIT dans `LICENSE`.
+- Classification normalisée de la provenance des preuves (`DIRECTLY_VERIFIED`, `USER_REPORTED`, `EXTERNAL_REPORTED`, `ILLUSTRATIVE`, `UNVERIFIED`).
+- Statuts de tests standardisés (`NOT_RUN`, `PASS`, `FAIL`, `BLOCKED`, `NOT_APPLICABLE`).
+- Séparation explicite entre statuts des Quality Gates et décisions exécutives de publication (`GO`, `CONDITIONAL_GO`, `NO_GO`, `INSUFFICIENT_EVIDENCE`).
+- Déploiement partagé multi-projets simplifié et prompts quotidiens en langage naturel direct.
+
+### Périmètre strict
 - **Aucun logiciel exécutable embarqué dans le toolkit** : Pas d'interface Electron, pas de serveur Web local, pas de démon Python dans le toolkit.
 - **Aucune dépendance externe** : Pas de clés API requises, pas d'abonnements tiers obligatoires.
 - **Aucune base vectorielle opaque** : Toutes les connaissances et l'état du projet résident dans des fichiers Markdown versionnés dans Git.
 
 ---
 
-## 4. Démarrage rapide (en 5 minutes)
+## 4. Démarrage rapide : Les 3 situations courantes
 
-### Étape 1 : Rendre le toolkit accessible
-Placez le dossier `CalmTechnology-DevToolkit` dans votre espace de travail ou indiquez son chemin à votre assistant IA :
+Le toolkit est conçu pour être partagé entre plusieurs projets sans duplication de dépôt :
+
 ```text
-mon-projet/
-├── docs/                      # Documentation de votre projet (créée via les modèles)
-└── CalmTechnology-DevToolkit/ # Boîte à outils de référence
+Documents/
+└── Antigravity-5.1/
+    ├── CalmTechnology-DevToolkit/   # Boîte à outils méthodologique partagée
+    ├── MonProjet/                   # Votre projet (avec ses propres docs/ et src/)
+    └── CoreS3-RuleBot/              # Autre projet
 ```
 
-### Étape 2 : Initialiser la documentation de votre projet
-Copiez les modèles du dossier `CalmTechnology-DevToolkit/templates/` vers le dossier `docs/` de votre projet :
-- `PROJECT.md`
-- `REQUIREMENTS.md`
-- `ARCHITECTURE.md`
-- `DECISIONS.md`
-- `PROJECT_STATE.md`
-- `TEST_PLAN.md`
-- `TEST_RESULTS.md`
-- `KNOWN_ISSUES.md`
+### Situation A — Créer un nouveau projet
+1. Ouvrez votre projet et assurez-vous que `CalmTechnology-DevToolkit` est accessible.
+2. Dans le chat avec l'assistant, lancez le prompt court :
+   ```text
+   Utilise CalmTechnology-DevToolkit.
+   Initialise la documentation de ce projet selon le workflow new-project.
+   Ne commence pas à programmer.
+   ```
+3. Exprimez votre concept. L'assistant initialise le dossier `docs/` et évalue le Quality Gate `QG-01`.
 
-### Étape 3 : Guider votre assistant IA
-Transmettez le fichier `AGENTS.md` à votre assistant et formulez votre demande :
-```text
-Merci de lire CalmTechnology-DevToolkit/AGENTS.md.
-Nous débutons un projet selon le workflow CalmTechnology-DevToolkit/workflows/new-project.md.
-Active la compétence CalmTechnology-DevToolkit/skills/project-definition/SKILL.md.
-```
+### Situation B — Importer un projet existant
+1. Ouvrez le dossier de votre projet existant dans votre éditeur.
+2. Dans le chat avec l'assistant, lancez le prompt court :
+   ```text
+   Utilise CalmTechnology-DevToolkit.
+   Examine ce projet existant et initialise sa documentation à partir du code réel.
+   Ne modifie aucun fichier source.
+   ```
+3. L'assistant examine le code, reconstruit l'état documentaire dans `docs/PROJECT_STATE.md` et propose la suite sans toucher au code.
+
+### Situation C — Continuer un projet déjà intégré
+1. Ouvrez votre projet contenant déjà `docs/PROJECT_STATE.md`.
+2. Dans le chat avec l'assistant, lancez le prompt court :
+   ```text
+   Utilise CalmTechnology-DevToolkit.
+   Lis PROJECT_STATE.md, vérifie l'état réel du projet et propose la prochaine étape.
+   Ne modifie pas le code.
+   ```
+3. L'assistant se synchronise immédiatement sur l'état réel et propose la prochaine étape ciblée.
 
 ---
 
 ## 5. Principe fondamental : la mémoire documentaire
 
-Le document pivot de tout projet est `PROJECT_STATE.md`. Il protège le projet des limites de contexte des conversations IA :
+Le document pivot de tout projet est `docs/PROJECT_STATE.md`. Il protège le projet des limites de contexte des conversations IA :
 
 ```mermaid
 graph TD
@@ -108,8 +128,8 @@ Lorsqu'une nouvelle session de discussion s'ouvre, l'assistant consulte `PROJECT
 CalmTechnology-DevToolkit/
 ├── README.md               # Présentation du projet en anglais
 ├── README.fr.md            # Présentation du projet en français
-├── LICENSE                 # Licence MIT
-├── VERSION                 # Version du toolkit (0.1.0)
+├── LICENSE                 # Licence MIT intégrale
+├── VERSION                 # Version du toolkit (0.1.0.1)
 ├── CHANGELOG.md            # Journal des modifications
 ├── AGENTS.md               # Règles d'engagement obligatoires pour l'IA
 ├── CONTRIBUTING.md         # Guide de contribution
@@ -117,20 +137,20 @@ CalmTechnology-DevToolkit/
 ├── workflows/              # 7 workflows méthodologiques
 ├── templates/              # 12 modèles de documents
 ├── profiles/               # 6 profils techniques de contraintes
-├── prompts/                # 8 prompts prêts à l'emploi
+├── prompts/                # 8 prompts prêts à l'emploi (formats court et détaillé)
 ├── examples/               # Exemple pédagogique CoreS3-RuleBot
-└── docs/                   # Documentation méthodologique complète
+└── docs/                   # Documentation méthodologique et rapports de validation
 ```
 
 ---
 
 ## 7. Exemple pédagogique : CoreS3-RuleBot
 
-Consultez `examples/CoreS3-RuleBot/` pour étudier un cas réel et complet :
+Consultez `examples/CoreS3-RuleBot/` pour étudier un cas d'école complet :
 - Respect des contraintes matérielles ESP32-S3 et M5Stack CoreS3 (écran ILI9342 en paysage natif à `setRotation(0)`).
 - Normalisation et appariement déterministe de texte sans dépendre d'un LLM distant.
-- Matrice de tests séparant rigoureusement compilation hôte, simulation PC et validation sur matériel réel.
-- Scénario d'audit, de correction ciblée et de revue de publication Go/No-Go.
+- Matrice de tests séparant rigoureusement simulation hôte, tests matériels et scénarios pédagogiques.
+- Scénario d'audit, de correction ciblée et de revue de publication formelle Go/No-Go.
 
 ---
 
@@ -144,4 +164,5 @@ Consultez `examples/CoreS3-RuleBot/` pour étudier un cas réel et complet :
 - [Guide d'intégration Antigravity](docs/ANTIGRAVITY_INTEGRATION.md)
 - [Spécification des Quality Gates](docs/QUALITY_GATES.md)
 - [Glossaire](docs/GLOSSARY.md)
-- [Rapport de validation v0.1.0](docs/VALIDATION_REPORT_v0.1.0.md)
+- [Rapport de validation v0.1.0.1 Corrective](docs/VALIDATION_REPORT_v0.1.0.1.md)
+- [Rapport de validation v0.1.0 Foundation](docs/VALIDATION_REPORT_v0.1.0.md)
